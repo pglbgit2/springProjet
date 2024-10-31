@@ -1,0 +1,4 @@
+-- ATTENTION : Bien penser aux quotes simples pour les valeurs de type chaines...
+-- insert into MYUSER (LOGIN,PASSWORD) values('alice','alice'),('bob','bob');
+--insert into MESSAGE (MSGID,MSGDATE,TEXT,FROM_LOGIN,TO_LOGIN) values(1,'2021-09-24 11:13:57','Tu viens en AAR?','alice','bob'),(2,'2021-09-24 11:16:21','Ah non je ne suis pas dans ton groupe...','bob','alice'),(3,'2021-09-24 11:18:12','Bon ben moi je vais en AAR','alice','bob');
+-- insert into MESSAGE (MSGDATE,TEXT,FROM_LOGIN,TO_LOGIN) values('2021-09-24 11:13:57','Tu viens en AAR?','alice','bob'),('2021-09-24 11:16:21','Ah non je ne suis pas dans ton groupe...','bob','alice'),('2021-09-24 11:18:12','Bon ben moi je vais en AAR','alice','bob');
