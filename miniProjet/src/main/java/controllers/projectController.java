@@ -32,7 +32,7 @@ public class projectController {
     @PostMapping("login")
     public String checkLP(LoginUserDto loginUserDto, BindingResult result, Model model){
         if (facade.checkEmailPassword(loginUserDto.getEmail(), loginUserDto.getPassword())){
-            getWelcomeFromLoginRegister(loginUserDto, model);
+            getWelcome(loginUserDto.getEmail(), model);
             return "welcome";
         } else{
             result.addError(new ObjectError("user","Les informations saisies ne correspondent pas à un utilisateur connu."));
@@ -48,22 +48,22 @@ public class projectController {
             result.addError(new ObjectError("user", "Ce login n'est pas disponible"));
             return "login";
         }
-        getWelcomeFromLoginRegister(loginUserDto, model);
+        getWelcome(loginUserDto.getEmail(), model);
         return "welcome";
     }
 
     /**
      *
-     * @param loginUserDto : LoginUserDto
+     * @param email : String
      * @param model : Model
      */
-    private void getWelcomeFromLoginRegister(LoginUserDto loginUserDto, Model model) {
-        model.addAttribute("username", facade.getUserName(loginUserDto.getEmail()));
-        model.addAttribute("courant", loginUserDto.getEmail());
-        model.addAttribute("userDto", facade.getUserProfile(loginUserDto.getEmail()));
-        model.addAttribute("users",facade.getAllUserNamesExcept(loginUserDto.getEmail()));
+    private void getWelcome(String email, Model model) {
+        model.addAttribute("username", facade.getUserName(email));
+        model.addAttribute("courant", email);
+        model.addAttribute("userDto", facade.getUserProfile(email));
+        model.addAttribute("users",facade.getAllUserNamesExcept(email));
         model.addAttribute("requestDto",new RequestDto());
-        model.addAttribute("relations", facade.getUserRelations(loginUserDto.getEmail()));
+        model.addAttribute("relations", facade.getUserRelations(email));
     }
 
     @PostMapping("profil")
@@ -101,19 +101,6 @@ public class projectController {
         return "welcome";
     }
 
-    /**
-     *
-     * @param courant : LoginUserDto
-     * @param model : Model
-     */
-    private void getWelcome(@SessionAttribute("courant") String courant, Model model) {
-        model.addAttribute("username", facade.getUserName(courant));
-        model.addAttribute("courant", courant);
-        model.addAttribute("userDto", facade.getUserProfile(courant));
-        model.addAttribute("users",facade.getAllUserNamesExcept(courant));
-        model.addAttribute("requestDto", new RequestDto());
-        model.addAttribute("relations", facade.getUserRelations(courant));
-    }
 
 
 

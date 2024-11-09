@@ -145,7 +145,11 @@ public class Facade {
 
             String username = user.getSurname();
             if (username == null || username.isEmpty()) {
-                return email.substring(0, email.indexOf('@'));
+                username = email.substring(0, email.indexOf('@'));
+                if(username.contains(".")){
+                    username = username.replace('.', ' ');
+                }
+                return username;
             } else {
                 return username;
             }
