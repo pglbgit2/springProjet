@@ -50,7 +50,6 @@ public class RelationshipController {
 
     @GetMapping("/{personId}")
     public String getFriendships(@PathVariable("personId") Long personId, Model model) {
-        System.out.println("getFriendShip endpoint reached");
         Person person = personService.findById(personId);
         if (person == null) {
             return "redirect:/persons";

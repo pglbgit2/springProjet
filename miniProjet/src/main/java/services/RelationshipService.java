@@ -22,15 +22,21 @@ public class RelationshipService {
 
     @Transactional
     public void createRelationShip(RequestDto requestDto) {
-        System.out.println("calling method createRelationShip");
+
         Long person1Id = requestDto.getFromUser();
         Long person2Id = requestDto.getToUser();
+
+
         if (person1Id.equals(person2Id)) {
             throw new IllegalArgumentException("Impossible de créer une amitié entre une personne et elle-même.");
         }
 
         Person person1 = personService.findById(person1Id);
         Person person2 = personService.findById(person2Id);
+        if(person1 == null && person2 == null){
+            throw new IllegalArgumentException("Personne introuvable pour les identifiants donnés.");
+        }
+
 
         List<Relationship> relationships = person1.getAllRelationship();
         for (Relationship relationship : relationships) {
@@ -40,7 +46,6 @@ public class RelationshipService {
         }
 
         Relationship relationship = new Relationship(requestDto.getRequestStr(), person1, person2);
-        System.out.println("creating relationship");
         em.persist(relationship);
     }
 }
