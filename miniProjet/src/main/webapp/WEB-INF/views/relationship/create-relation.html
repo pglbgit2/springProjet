@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Créer une amitié</title>
+</head>
+<body>
+<h2>Créer une amitié</h2>
+<form action="#" th:action="@{/relationships/create}" method="post"  th:object="${requestDto}">
+    <label>Personne 1:</label>
+    <select th:field="*{fromUser}"  required>
+        <option th:each="person : ${people}"  th:value="${person.id}" th:text="${person.firstName + ' ' + person.lastName}"></option>
+    </select>
+    <label>Personne 2:</label>
+    <select th:field="*{toUser}" required>
+        <option th:each="person : ${people}"  th:value="${person.id}"  th:text="${person.firstName + ' ' + person.lastName}"></option>
+    </select>
+    Relation Type:
+    <label>
+    <input type="text" th:field="*{requestStr}"  minlength="1" required/>
+    </label>
+    <button type="submit">Créer une amitié</button>
+</form>
+
+<div th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></div>
+
+</body>
+</html>

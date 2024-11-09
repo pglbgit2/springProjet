@@ -13,12 +13,11 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
-    private String email;
-    private String surname;
-    private String familyName;
+public class PersonDto {
+    private Long id;
+    private String firstName;
+    private String lastName;
     private LocalDate birthDate;
-
 }
 
 

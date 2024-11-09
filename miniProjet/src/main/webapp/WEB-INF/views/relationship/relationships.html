@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des amitiés</title>
+</head>
+<body>
+<h2 th:text="'Amitiés de ' + ${person.firstName} + ' ' + ${person.lastName}"></h2>
+<table>
+    <tr th:each="relationship : ${relations}">
+        <td th:text="${relationship.fromUser.id == person.id ? relationship.toUser.firstName + ' ' + relationship.toUser.lastName : relationship.fromUser.firstName + ' ' + relationship.fromUser.lastName+ ' relation:'+ relationship.relationType}"></td>
+    </tr>
+</table>
+<a th:href="@{/relationships/new}">Ajouter une amitié</a>
+</body>
+</html>
